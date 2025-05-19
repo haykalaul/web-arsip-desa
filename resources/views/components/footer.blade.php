@@ -6,7 +6,7 @@
                 document.write(new Date().getFullYear());
             </script>
             , {{ __('footer.made_by') }}
-            <a href="https://github.com/404NotFoundIndonesia" target="_blank" class="footer-link fw-bolder">404 Not Found Indonesia</a>
+            <a href="#" target="_blank" class="footer-link fw-bolder">arsera.id</a>
         </div>
     </div>
 </footer>

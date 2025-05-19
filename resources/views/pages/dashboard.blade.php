@@ -122,6 +122,16 @@
                 </div>
                 <div class="col-lg-6 col-md-12 col-6 mb-4">
                     <x-dashboard-card-simple
+                        :label="__('dashboard.classification')"
+                        :value="$classification"
+                        :daily="false"
+                        color="warning"
+                        icon="bx-envelope"
+                        :percentage="0"
+                    />
+                </div>
+                <div class="col-lg-6 col-md-12 col-6 mb-4">
+                    <x-dashboard-card-simple
                         :label="__('dashboard.active_user')"
                         :value="$activeUser"
                         :daily="false"
