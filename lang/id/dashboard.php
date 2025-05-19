@@ -10,6 +10,7 @@ return [
     'incoming_letter' => 'Surat Masuk',
     'outgoing_letter' => 'Surat Keluar',
     'disposition_letter' => 'Surat Disposisi',
+    'classification' => 'Klasifikasi Surat',
     'active_user' => 'Pengguna Aktif',
     'view_more' => 'Lihat Detail',
     'today_report' => 'Laporan hari ini',
