@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Attachment;
 use App\Models\Config;
 use App\Models\Disposition;
+use App\Models\Classification;
 use App\Models\Letter;
 use App\Models\User;
 use Carbon\Carbon;
@@ -46,6 +47,7 @@ class PageController extends Controller
             'todayDispositionLetter' => $todayDispositionLetter,
             'todayLetterTransaction' => $todayLetterTransaction,
             'activeUser' => User::active()->count(),
+            'classification' => Classification::count(),
             'percentageIncomingLetter' => GeneralHelper::calculateChangePercentage($yesterdayIncomingLetter, $todayIncomingLetter),
             'percentageOutgoingLetter' => GeneralHelper::calculateChangePercentage($yesterdayOutgoingLetter, $todayOutgoingLetter),
             'percentageDispositionLetter' => GeneralHelper::calculateChangePercentage($yesterdayDispositionLetter, $todayDispositionLetter),
