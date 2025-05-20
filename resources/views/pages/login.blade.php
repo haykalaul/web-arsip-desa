@@ -71,6 +71,13 @@
                         </a>
                     </div>
 
+                    <div
+                        class="app-brand justify-content-center mb-3"
+                        style="font-size: 1.5rem; font-weight: 600; color: #000000">
+                        Login Admin {{ config('app.name') }}
+                    </div>
+                    <!-- /Logo -->
+
                     <form id="formAuthentication" class="mb-3" action="{{ route('login') }}" method="POST">
                         @csrf
                         <div class="mb-3">
