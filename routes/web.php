@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('home');
+})->name('home');
+
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', [\App\Http\Controllers\PageController::class, 'index'])->name('home');
+    Route::get('/home', function () {
+        return redirect()->route('dashboard');
+    })->name('home.redirect');
+    Route::get('/dashboard', [\App\Http\Controllers\PageController::class, 'index'])->name('dashboard');
+    Route::get('/logout', function () {
+        Auth::logout();
+        return redirect()->route('home');
+    })->name('logout');
 
     Route::resource('user', \App\Http\Controllers\UserController::class)
         ->except(['show', 'edit', 'create'])
