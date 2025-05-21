@@ -18,7 +18,7 @@
     <nav class="  fixed-top navbar navbar-expand-lg navbar-light bg-light py-3" style="background-color: #c1cfff;;">
         <div class="container-fluid">
             <img src="{{ asset('assets/sidoarjo.png') }}" style="margin-left:20px; width: 50px" alt="">
-            <img src="images/kemenkes1.png" style="margin-left:40px; width: 100px" alt="">
+            <img src="{{ asset('assets/arsera-logo.png') }}" style="margin-left:20px; width: 50px" alt="">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -75,37 +75,41 @@
     </nav>
 
     <div class="background-image" id="beranda">
-        <img src="{{ asset('assets/herosection.png') }}" alt="">
-    </div>
+        <img src="{{ asset('assets/hero.png') }}" alt="" style="width: 100%;height: 100vh;object-fit: cover;">
+        <div class="text" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);">
+            <h1 style="color: white;font-size: 4rem;">Selamat Datang di Website Resmi</h1>
+            <h1 style="color: white;font-size: 4rem;">Desa Kebonsari</h1>
+            <p style="color: white;font-size: 2rem;">Kecamatan Candi Kabupaten Sidoarjo</p>
+        </div>
 
-    <div class="about" id="profil" style="padding: 6rem 7%;background:#e1e1e1;">
-        <div class="main-about" style="display: flex;justify-content:center;align-items:center;gap:15px;flex-wrap:wrap;">
+        <div class="about" id="profil" style="padding: 6rem 7%;background:#e1e1e1;">
+            <div class="main-about" style="display: flex;justify-content:center;align-items:center;gap:15px;flex-wrap:wrap;">
+                <div class="inner-about" style="flex:1 1 45rem;">
+                    <br class="about-content" style="width: 80%;word-wrap: break-word;">
+                    <h1 class="section-heading text-uppercase">Profil</h1>
+                    <br>VISI<br>Dengan tekad perubahan terwujudnya masyarakat Desa Kebonsari yang sejahtera,maju,berkarakter,berkelanjutan dengan menjunjung tinggi supremasi hukum serta norma norma agama dan istiadat yang luhur</br><br>MISI<br>
+                    <ol>
+                        <li>Menciptakan Masyarakat yang berakhlak mulia dan ber-Ketuhanan Yang Maha Esa</li>
+                        <li>Meningkatkan sumber daya manusia agar pintar, proffesional, berdaya guna untuk membangun dan mengolah potensi desa Kebonsari</li>
+                        <li>Memberdayakan Sumber Daya Alam yang ada untuk dapat diambil manfaatnya tanpa merusak lingkungan dan tetap berwawasan lingkungan</li>
+                        <li>Mewujudkan demokratis dalam segala aspek kehidupan,menghormati HAM dan supremasi Hukum</li>
+                        <li>Mewujudkan kesadaran akan kebersamaan, persatuan, ketentraman, kekeluargaan, dan gotong royong agar mempunyai rasa tanggung jawab dalam bidang masing-asing serta saling hormat menghormati</li>
+                        <li>Menumbuh kembangkan usaha kecil menengah</li>
+                        <li>Membangun dan mendorong majunya bidang pendidikan baik formal maupun informal yang mudah diakses dan dinikmati seluruh warga masyarakat tanpa terkecuali yang mampu menghasilkan isntan intelektual, inovatif dan enterpreneur (Wirausahawan)</li>
+                        <li>Membangun dan mendorong usaha-usaha untuk pengembangan dan optimalisasi sektor pertanian, perkebunan, peternakan, dan perikanan, baik tahap produksi maupun tahap pengolahan hasilnya</li>
+                        <li>Menciptakan Upaya Tata Kelola Pemerintahan Yang baik</li>
+                        <li>Meningkatkan pembangunan infrastruktur yang mendukung perekonomian desa,serta infrastruktur strategis</li>
+                        </p>
+                </div>
+
+            </div>
             <div class="inner-about" style="flex:1 1 45rem;">
-                <br class="about-content" style="width: 80%;">
-                <h1>Profil</h1><br>
-                <br>VISI<br>Dengan tekad perubahan terwujudnya masyarakat Desa Kebonsari yang sejahtera,maju,berkarakter,berkelanjutan dengan menjunjung tinggi supremasi hukum serta norma norma agama dan istiadat yang luhur</br><br>MISI<br>
-                <ol>
-                    <li>Menciptakan Masyarakat yang berakhlak mulia dan ber-Ketuhanan Yang Maha Esa</li>
-                    <li>Meningkatkan sumber daya manusia agar pintar, proffesional, berdaya guna untuk membangun dan mengolah potensi desa Kebonsari</li>
-                    <li>Memberdayakan Sumber Daya Alam yang ada untuk dapat diambil manfaatnya tanpa merusak lingkungan dan tetap berwawasan lingkungan</li>
-                    <li>Mewujudkan demokratis dalam segala aspek kehidupan,menghormati HAM dan supremasi Hukum</li>
-                    <li>Mewujudkan kesadaran akan kebersamaan, persatuan, ketentraman, kekeluargaan, dan gotong royong agar mempunyai rasa tanggung jawab dalam bidang masing-asing serta saling hormat menghormati</li>
-                    <li>Menumbuh kembangkan usaha kecil menengah</li>
-                    <li>Membangun dan mendorong majunya bidang pendidikan baik formal maupun informal yang mudah diakses dan dinikmati seluruh warga masyarakat tanpa terkecuali yang mampu menghasilkan isntan intelektual, inovatif dan enterpreneur (Wirausahawan)</li>
-                    <li>Membangun dan mendorong usaha-usaha untuk pengembangan dan optimalisasi sektor pertanian, perkebunan, peternakan, dan perikanan, baik tahap produksi maupun tahap pengolahan hasilnya</li>
-                    <li>Menciptakan Upaya Tata Kelola Pemerintahan Yang baik</li>
-                    <li>Meningkatkan pembangunan infrastruktur yang mendukung perekonomian desa,serta infrastruktur strategis</li>
-                    </p>
-                    <a style="background: #e1e1e1; padding: 1rem 3rem;font-size: 1.5rem;color:black;border-radius: 10px;transition: .5s;" href="#">Selengkapnya ▾</a>
-            </div>
-
-        </div>
-        <div class="inner-about" style="flex:1 1 45rem;">
-            <div class="inner-about-image" style="width: 100%;">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/uvKZ_ytmgXQ?si=39yd5abq8YCreenz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <div class="inner-about-image" style="width: 100%;">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/uvKZ_ytmgXQ?si=39yd5abq8YCreenz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <a style="background: #e1e1e1; padding: 1rem 3rem;font-size: 1.5rem;color:black;border-radius: 10px;transition: .5s;" href="#">Selengkapnya ▾</a>
             </div>
         </div>
-    </div>
     </div>
 
     <!-- Lembaga Desa -->
@@ -148,16 +152,19 @@
         <br><br>
 
         <div class="main-doctor" style="display:flex;justify-content: center;align-items: center;flex-wrap: wrap;gap: 30px;">
-            <div class="inner-doctor" style="flex: 1 300px;position: relative;">
-                <img src="{{ asset('assets/hari1.jpg') }}" a href="https://suryakabar.com/2024/10/15/menengok-kampung-bebek-dan-telur-asin-desa-kebonsari-kecamatan-candi-sidoarjo/" alt="">
+            <div class="inner-doctor" style="flex: 1 300px;width: 100%;position: relative;">
+                <img src="{{ asset('assets/hari1.png') }}" alt="">
+                <a href="https://suryakabar.com/2024/10/15/menengok-kampung-bebek-dan-telur-asin-desa-kebonsari-kecamatan-candi-sidoarjo/">Selengkapnya</a>
             </div>
 
-            <div class="inner-doctor" style="flex: 1 300px;position: relative;">
-                <img src="{{ asset('assets/hari2.jpg') }}" a href="https://sidoarjoterkini.com/koramil-0816-02-candi-pantau-banjir-di-desa-kebonsari-warga-diminta-waspada/" alt="">
+            <div class="inner-doctor" style="flex: 1 300px;width: 100%;position: relative;">
+                <img src="{{ asset('assets/hari2.png') }}" alt="">
+                <a href="https://sidoarjoterkini.com/koramil-0816-02-candi-pantau-banjir-di-desa-kebonsari-warga-diminta-waspada/">Selengkapnya</a>
             </div>
 
-            <div class="inner-doctor" style="flex: 1 300px;position: relative;">
-                <img src="{{ asset('assets/hari3.jpg') }}" a href="https://kempalan.com/2025/05/02/polisi-pacu-potensi-kampung-bebek-desa-kebonsari-guna-dukung-ketahanan-pangan-nasional/" alt="">
+            <div class="inner-doctor" style="flex: 1 300px;width: 100%;position: relative;">
+                <img src="{{ asset('assets/hari3.png') }}" alt="">
+                <a href="https://kempalan.com/2025/05/02/polisi-pacu-potensi-kampung-bebek-desa-kebonsari-guna-dukung-ketahanan-pangan-nasional/">Selengkapnya</a>
             </div>
             <a href="#">Selengkapnya ▾</a>
         </div>

@@ -1,7 +1,7 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
         <a href="{{ route('home') }}" class="app-brand-link">
-            <img src="{{ asset('logo-black.png') }}" alt="{{ config('app.name') }}" width="35">
+            <img src="{{ asset('assets/arsera-logo.png') }}" alt="{{ config('app.name') }}" width="50px">
             <span class="app-brand-text demo text-black fw-bolder ms-2">{{ config('app.name') }}</span>
         </a>
 
