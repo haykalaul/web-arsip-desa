@@ -18,6 +18,7 @@
     <nav class="  fixed-top navbar navbar-expand-lg navbar-light bg-light py-3" style="background-color: #c1cfff;;">
         <div class="container-fluid">
             <img src="{{ asset('assets/sidoarjo.png') }}" style="margin-left:20px; width: 50px" alt="">
+            <img src="{{ asset('assets/unesa.png') }}" style="margin-left:20px; width: 50px" alt="">
             <img src="{{ asset('assets/arsera-logo.png') }}" style="margin-left:20px; width: 50px" alt="">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
