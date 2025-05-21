@@ -67,7 +67,7 @@
                     <!-- Logo -->
                     <div class="app-brand justify-content-center">
                         <a href="{{ route('home') }}" class="app-brand-link gap-2">
-                            <img src="{{ asset('logo-black.png') }}" alt="{{ config('app.name') }}" srcset="" width="75px">
+                            <img src="{{ asset('assets/arsera-logo.png') }}" alt="{{ config('app.name') }}" srcset="" width="75px">
                         </a>
                     </div>
 
