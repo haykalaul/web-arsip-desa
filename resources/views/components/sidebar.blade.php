@@ -63,6 +63,13 @@
                     </a>
                 </li>
             </ul>
+        <li class="menu-item {{ \Illuminate\support\Facades\Route::is('digital-signatures.*') ? 'active' : '' }}">
+            <a href="{{ route('digital-signatures.index') }}"
+                class="menu-link {{ request()->routeIs('digital-signatures.*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-signature"></i>
+                <p>Tanda Tangan Digital</p>
+            </a>
+        </li>
         </li>
 
         <li class="menu-header small text-uppercase">
@@ -89,32 +96,32 @@
             </ul>
         </li>
         @if(auth()->user()->role == 'admin')
-            <li class="menu-item {{ \Illuminate\Support\Facades\Route::is('reference.*') ? 'active open' : '' }}">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons bx bx-analyse"></i>
-                    <div data-i18n="{{ __('menu.reference.menu') }}">{{ __('menu.reference.menu') }}</div>
-                </a>
-                <ul class="menu-sub">
-                    <li class="menu-item {{ \Illuminate\Support\Facades\Route::is('reference.classification.*') ? 'active' : '' }}">
-                        <a href="{{ route('reference.classification.index') }}" class="menu-link">
-                            <div
-                                data-i18n="{{ __('menu.reference.classification') }}">{{ __('menu.reference.classification') }}</div>
-                        </a>
-                    </li>
-                    <li class="menu-item {{ \Illuminate\Support\Facades\Route::is('reference.status.*') ? 'active' : '' }}">
-                        <a href="{{ route('reference.status.index') }}" class="menu-link">
-                            <div data-i18n="{{ __('menu.reference.status') }}">{{ __('menu.reference.status') }}</div>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <!-- User Management -->
-            <li class="menu-item {{ \Illuminate\Support\Facades\Route::is('user.*') ? 'active' : '' }}">
-                <a href="{{ route('user.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-user-pin"></i>
-                    <div data-i18n="{{ __('menu.users') }}">{{ __('menu.users') }}</div>
-                </a>
-            </li>
+        <li class="menu-item {{ \Illuminate\Support\Facades\Route::is('reference.*') ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-analyse"></i>
+                <div data-i18n="{{ __('menu.reference.menu') }}">{{ __('menu.reference.menu') }}</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ \Illuminate\Support\Facades\Route::is('reference.classification.*') ? 'active' : '' }}">
+                    <a href="{{ route('reference.classification.index') }}" class="menu-link">
+                        <div
+                            data-i18n="{{ __('menu.reference.classification') }}">{{ __('menu.reference.classification') }}</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ \Illuminate\Support\Facades\Route::is('reference.status.*') ? 'active' : '' }}">
+                    <a href="{{ route('reference.status.index') }}" class="menu-link">
+                        <div data-i18n="{{ __('menu.reference.status') }}">{{ __('menu.reference.status') }}</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- User Management -->
+        <li class="menu-item {{ \Illuminate\Support\Facades\Route::is('user.*') ? 'active' : '' }}">
+            <a href="{{ route('user.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user-pin"></i>
+                <div data-i18n="{{ __('menu.users') }}">{{ __('menu.users') }}</div>
+            </a>
+        </li>
         @endif
     </ul>
 </aside>

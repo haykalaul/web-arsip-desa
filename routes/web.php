@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\DigitalSignatureController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,16 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('user', \App\Http\Controllers\UserController::class)
         ->except(['show', 'edit', 'create'])
         ->middleware(['role:admin']);
+
+    Route::prefix('digital-signatures')->name('digital-signatures.')->group(function () {
+        Route::get('/', [DigitalSignatureController::class, 'index'])->name('index');
+        Route::get('/create', [DigitalSignatureController::class, 'create'])->name('create');
+        Route::post('/', [DigitalSignatureController::class, 'store'])->name('store');
+        Route::get('/{digitalSignature}', [DigitalSignatureController::class, 'show'])->name('show');
+        Route::get('/{digitalSignature}/download', [DigitalSignatureController::class, 'download'])->name('download');
+        Route::get('/{digitalSignature}/certificate', [DigitalSignatureController::class, 'generateCertificate'])->name('certificate');
+        Route::patch('/{digitalSignature}/revoke', [DigitalSignatureController::class, 'revoke'])->name('revoke');
+    });
 
     Route::get('profile', [\App\Http\Controllers\PageController::class, 'profile'])
         ->name('profile.show');
@@ -72,5 +83,12 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('classification', \App\Http\Controllers\ClassificationController::class)->except(['show', 'create', 'edit']);
         Route::resource('status', \App\Http\Controllers\LetterStatusController::class)->except(['show', 'create', 'edit']);
     });
+});
 
+// Public verification routes (No authentication required)
+Route::get('/verify-signature/{hash}', [DigitalSignatureController::class, 'verify'])->name('signature.verify');
+
+// API Routes for verification
+Route::prefix('api/v1')->group(function () {
+    Route::get('/verify-signature/{hash}', [DigitalSignatureController::class, 'apiVerify'])->name('api.signature.verify');
 });
