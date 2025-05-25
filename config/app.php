@@ -211,6 +211,11 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        'Pdf' => Barryvdh\DomPDF\Facade\Pdf::class,
+        'Storage' => Illuminate\Support\Facades\Storage::class,
+        'throttle:verification' => \Illuminate\Routing\Middleware\ThrottleRequests::class.':60,1',
+
     ])->toArray(),
 
 ];

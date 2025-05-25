@@ -31,4 +31,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'digital_signature' => [
+        'max_file_size' => env('DIGITAL_SIGNATURE_MAX_FILE_SIZE', 5120), // KB
+        'allowed_extensions' => ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'],
+        'storage_path' => 'documents/signed',
+        'qr_code_path' => 'qrcodes',
+        'verification_base_url' => env('APP_URL', 'http://localhost') . '/verify-signature/',
+    ],
 ];
