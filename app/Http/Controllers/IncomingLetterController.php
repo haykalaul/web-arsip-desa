@@ -25,9 +25,18 @@ class IncomingLetterController extends Controller
      */
     public function index(Request $request): View
     {
+        $query = Letter::incoming();
+
+        // Apply classification filter if provided
+        if ($request->filled('classification_code') && $request->classification_code != 'all') {
+            $query->where('classification_code', $request->classification_code);
+        }
+
         return view('pages.transaction.incoming.index', [
-            'data' => Letter::incoming()->render($request->search),
+            'data' => $query->render($request->search),
             'search' => $request->search,
+            'classification_code' => $request->classification_code,
+            'classifications' => Classification::all(),
         ]);
     }
 
@@ -39,12 +48,21 @@ class IncomingLetterController extends Controller
      */
     public function agenda(Request $request): View
     {
+        $query = Letter::incoming();
+
+        // Apply classification filter if provided
+        if ($request->filled('classification_code') && $request->classification_code != 'all') {
+            $query->where('classification_code', $request->classification_code);
+        }
+
         return view('pages.transaction.incoming.agenda', [
-            'data' => Letter::incoming()->agenda($request->since, $request->until, $request->filter)->render($request->search),
+            'data' => $query->agenda($request->since, $request->until, $request->filter)->render($request->search),
             'search' => $request->search,
             'since' => $request->since,
             'until' => $request->until,
             'filter' => $request->filter,
+            'classification_code' => $request->classification_code,
+            'classifications' => Classification::all(),
             'query' => $request->getQueryString(),
         ]);
     }
@@ -58,12 +76,21 @@ class IncomingLetterController extends Controller
         $agenda = __('menu.agenda.menu');
         $letter = __('menu.agenda.incoming_letter');
         $title = App::getLocale() == 'id' ? "$agenda $letter" : "$letter $agenda";
+
+        $query = Letter::incoming();
+
+        // Apply classification filter if provided
+        if ($request->filled('classification_code') && $request->classification_code != 'all') {
+            $query->where('classification_code', $request->classification_code);
+        }
+
         return view('pages.transaction.incoming.print', [
-            'data' => Letter::incoming()->agenda($request->since, $request->until, $request->filter)->get(),
+            'data' => $query->agenda($request->since, $request->until, $request->filter)->get(),
             'search' => $request->search,
             'since' => $request->since,
             'until' => $request->until,
             'filter' => $request->filter,
+            'classification_code' => $request->classification_code,
             'config' => Config::pluck('value','code')->toArray(),
             'title' => $title,
         ]);

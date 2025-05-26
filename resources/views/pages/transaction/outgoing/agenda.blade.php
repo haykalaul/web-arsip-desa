@@ -54,30 +54,49 @@
                 <thead>
                 <tr>
                     <th>{{ __('model.letter.agenda_number') }}</th>
+                    <th>{{ __('model.letter.classification_code') }}</th>
                     <th>{{ __('model.letter.reference_number') }}</th>
                     <th>{{ __('model.letter.to') }}</th>
                     <th>{{ __('model.letter.letter_date') }}</th>
                 </tr>
                 </thead>
-                @if($data)
+                @if($data && $data->count() > 0)
                     <tbody>
                     @foreach($data as $agenda)
                         <tr>
-                            <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-                                <strong>{{ $agenda->agenda_number }}</strong></td>
                             <td>
-                                <a href="{{ route('transaction.outgoing.show', $agenda) }}">{{ $agenda->reference_number }}</a>
+                                <i class="fab fa-angular fa-lg text-danger me-3"></i>
+                                <strong>{{ $agenda->agenda_number }}</strong>
+                            </td>
+                            <td>
+                                @if($agenda->classification)
+                                    <span class="badge bg-primary">{{ $agenda->classification->code }}</span>
+                                    <small class="text-muted d-block">{{ $agenda->classification->name ?? '' }}</small>
+                                @else
+                                    <span class="text-muted">{{ $agenda->classification_code ?? '-' }}</span>
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{ route('transaction.outgoing.show', $agenda) }}" class="text-primary">
+                                    {{ $agenda->reference_number }}
+                                </a>
                             </td>
                             <td>{{ $agenda->to }}</td>
-                            <td>{{ $agenda->formatted_letter_date }}</td>
+                            <td>
+                                <span>{{ $agenda->formatted_letter_date }}</span>
+                                <small class="text-muted d-block">{{ $agenda->letter_date->format('d/m/Y') }}</small>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
                 @else
                     <tbody>
                     <tr>
-                        <td colspan="4" class="text-center">
-                            {{ __('menu.general.empty') }}
+                        <td colspan="5" class="text-center py-4">
+                            <div class="text-muted">
+                                <i class="fas fa-inbox fa-2x mb-2"></i>
+                                <p class="mb-0">{{ __('menu.general.empty') }}</p>
+                            </div>
                         </td>
                     </tr>
                     </tbody>
@@ -85,6 +104,7 @@
                 <tfoot class="table-border-bottom-0">
                 <tr>
                     <th>{{ __('model.letter.agenda_number') }}</th>
+                    <th>{{ __('model.letter.classification_code') }}</th>
                     <th>{{ __('model.letter.reference_number') }}</th>
                     <th>{{ __('model.letter.to') }}</th>
                     <th>{{ __('model.letter.letter_date') }}</th>
@@ -94,5 +114,9 @@
         </div>
     </div>
 
-    {!! $data->appends(['search' => $search, 'since' => $since, 'until' => $until, 'filter' => $filter])->links() !!}
+    @if($data && $data->hasPages())
+        <div class="d-flex justify-content-center">
+            {!! $data->appends(['search' => $search, 'since' => $since, 'until' => $until, 'filter' => $filter])->links() !!}
+        </div>
+    @endif
 @endsection
