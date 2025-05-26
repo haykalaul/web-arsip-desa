@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class DigitalSignature extends Model
 {
@@ -49,11 +50,12 @@ class DigitalSignature extends Model
     /**
      * Generate unique signature hash
      */
-    public static function generateSignatureHash(string $filename, int $userId): string
+    public static function generateSignatureHash($documentName, $userId)
     {
         $timestamp = now()->timestamp;
-        $random = bin2hex(random_bytes(8));
-        return hash('sha256', $filename . $userId . $timestamp . $random);
+        $randomString = Str::random(32);
+
+        return hash('sha256', $documentName . $userId . $timestamp . $randomString);
     }
 
     /**
@@ -70,7 +72,7 @@ class DigitalSignature extends Model
     public function isValid(): bool
     {
         return $this->status === 'active' &&
-               file_exists(storage_path('app/public/' . $this->document_path));
+            file_exists(storage_path('app/public/' . $this->document_path));
     }
 
     /**
