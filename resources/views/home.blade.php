@@ -430,7 +430,7 @@
             <hr>
             <div class="text-center flex flex-col items-center justify-between gap-6 pb-4 md:flex-row md:items-end md:gap-0">
                 <img src="{{ asset('assets/unesa.png') }}" style="margin-left:20px; width: 30px; height: 30px;" alt="">
-                <p>&copy; {{ date('Y') }} D4 Administrasi Negara Unesa. All rights reserved.</p>
+                <p>&copy; {{ date('Y') }} Sarjana Terapan Administrasi Negara Unesa. All rights reserved.</p>
             </div>
         </div>
     </footer>

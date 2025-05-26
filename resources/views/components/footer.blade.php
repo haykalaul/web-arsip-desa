@@ -6,7 +6,7 @@
             <script>
                 document.write(new Date().getFullYear());
             </script>
-            D4 Administrasi Negara UNESA
+            Sarjana Terapan Administrasi Negara Unesa
         </div>
         <div class="flex flex-col items-center justify-between gap-6 pb-4 md:flex-row md:items-end md:gap-0">
             <h6 class="font-medium text-neutral-400">
