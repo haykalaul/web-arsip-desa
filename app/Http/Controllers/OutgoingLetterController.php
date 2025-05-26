@@ -24,9 +24,18 @@ class OutgoingLetterController extends Controller
      */
     public function index(Request $request): View
     {
+        $query = Letter::outgoing();
+
+        // Filter berdasarkan klasifikasi jika ada
+        if ($request->filled('classification_code') && $request->classification_code != 'all') {
+            $query->where('classification_code', $request->classification_code);
+        }
+
         return view('pages.transaction.outgoing.index', [
-            'data' => Letter::outgoing()->render($request->search),
+            'data' => $query->render($request->search),
             'search' => $request->search,
+            'classification_code' => $request->classification_code,
+            'classifications' => Classification::all(),
         ]);
     }
 
@@ -38,12 +47,21 @@ class OutgoingLetterController extends Controller
      */
     public function agenda(Request $request): View
     {
+        $query = Letter::outgoing();
+
+        // Filter berdasarkan klasifikasi jika ada
+        if ($request->filled('classification_code') && $request->classification_code != 'all') {
+            $query->where('classification_code', $request->classification_code);
+        }
+
         return view('pages.transaction.outgoing.agenda', [
-            'data' => Letter::outgoing()->agenda($request->since, $request->until, $request->filter)->render($request->search),
+            'data' => $query->agenda($request->since, $request->until, $request->filter)->render($request->search),
             'search' => $request->search,
             'since' => $request->since,
             'until' => $request->until,
             'filter' => $request->filter,
+            'classification_code' => $request->classification_code,
+            'classifications' => Classification::all(),
             'query' => $request->getQueryString(),
         ]);
     }
@@ -57,13 +75,22 @@ class OutgoingLetterController extends Controller
         $agenda = __('menu.agenda.menu');
         $letter = __('menu.agenda.outgoing_letter');
         $title = App::getLocale() == 'id' ? "$agenda $letter" : "$letter $agenda";
+
+        $query = Letter::outgoing();
+
+        // Filter berdasarkan klasifikasi jika ada
+        if ($request->filled('classification_code') && $request->classification_code != 'all') {
+            $query->where('classification_code', $request->classification_code);
+        }
+
         return view('pages.transaction.outgoing.print', [
-            'data' => Letter::outgoing()->agenda($request->since, $request->until, $request->filter)->get(),
+            'data' => $query->agenda($request->since, $request->until, $request->filter)->get(),
             'search' => $request->search,
             'since' => $request->since,
             'until' => $request->until,
             'filter' => $request->filter,
-            'config' => Config::pluck('value','code')->toArray(),
+            'classification_code' => $request->classification_code,
+            'config' => Config::pluck('value', 'code')->toArray(),
             'title' => $title,
         ]);
     }
@@ -99,7 +126,7 @@ class OutgoingLetterController extends Controller
                 foreach ($request->attachments as $attachment) {
                     $extension = $attachment->getClientOriginalExtension();
                     if (!in_array($extension, ['png', 'jpg', 'jpeg', 'pdf'])) continue;
-                    $filename = time() . '-'. $attachment->getClientOriginalName();
+                    $filename = time() . '-' . $attachment->getClientOriginalName();
                     $filename = str_replace(' ', '-', $filename);
                     $attachment->storeAs('public/attachments', $filename);
                     Attachment::create([
@@ -160,7 +187,7 @@ class OutgoingLetterController extends Controller
                 foreach ($request->attachments as $attachment) {
                     $extension = $attachment->getClientOriginalExtension();
                     if (!in_array($extension, ['png', 'jpg', 'jpeg', 'pdf'])) continue;
-                    $filename = time() . '-'. $attachment->getClientOriginalName();
+                    $filename = time() . '-' . $attachment->getClientOriginalName();
                     $filename = str_replace(' ', '-', $filename);
                     $attachment->storeAs('public/attachments', $filename);
                     Attachment::create([
