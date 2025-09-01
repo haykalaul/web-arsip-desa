@@ -168,7 +168,7 @@
                                 <label class="custom-file-label" for="document">Pilih file...</label>
                             </div>
                             <small class="form-text text-muted">
-                                Format yang didukung: PDF, DOC, DOCX, JPG, JPEG, PNG. Maksimal 5MB.
+                                Format yang didukung: PDF Maksimal 5MB.
                             </small>
                             @error('document')
                             <div class="invalid-feedback">{{ $message }}</div>
