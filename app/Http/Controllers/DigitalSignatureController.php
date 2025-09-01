@@ -46,7 +46,7 @@ class DigitalSignatureController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'document' => 'required|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120',
+            'document' => 'required|file|mimes:pdf|max:5120',
             'document_name' => 'required|string|max:255',
             'document_type' => 'nullable|string|max:100',
             'description' => 'nullable|string|max:1000',

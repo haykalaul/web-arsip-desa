@@ -48,6 +48,8 @@
                         <input type="file" class="form-control @error('attachments') is-invalid @enderror" id="attachments" name="attachments[]" multiple />
                         <span class="error invalid-feedback">{{ $errors->first('attachments') }}</span>
                     </div>
+                    <small class="form-text text-muted">
+                        {{ __('Format yang disarankan: PDF Maksimal 5MB.') }}
                 </div>
             </div>
             <div class="card-footer pt-0">

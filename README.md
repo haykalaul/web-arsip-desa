@@ -68,77 +68,246 @@ Bisa didownload di [sini](docs/surat.sql).
    ```sh
    make setup-db
    ```
-4. (Opsional) Tambahkan data dummy:
-   ```sh
-   make setup-dummy
-   ```
-5. Jalankan aplikasi:
-   ```sh
-   make run
-   ```
+<p align="center">
+   <img src="https://avatars.githubusercontent.com/u/87377917?s=200&v=4" width="160" alt="Project Logo">
+</p>
 
-### 🛠️ Setup Manual (Kalau Mau Cara Lama)
-1. Clone repository ini, lalu jalankan:
-   ```sh
-   composer install
-   ```
-2. Salin konfigurasi default:
-   ```sh
-   cp .env.example .env
-   ```
-3. Sesuaikan `.env` dengan database Anda.
-4. Generate application key:
-   ```sh
-   php artisan key:generate
-   ```
-5. Buat symbolic link untuk storage:
-   ```sh
-   php artisan storage:link
-   ```
-6. Jalankan migrasi database:
-   ```sh
-   php artisan migrate
-   ```
-7. Tambahkan akun administrator:
-   ```sh
-   php artisan db:seed --class=UserSeeder
-   ```
-8. Tambahkan konfigurasi awal:
-   ```sh
-   php artisan db:seed --class=ConfigSeeder
-   ```
-9. (Opsional) Tambahkan data dummy:
-   ```sh
-   php artisan db:seed
-   ```
-10. Jalankan aplikasi:
-   ```sh
-   php artisan serve
-   ```
+## Laravel Surat Menyurat v1 — Panduan Setup & Deploy (Fullstack + DB)
 
+Panduan ini menjelaskan cara menjalankan aplikasi secara lokal, menyiapkan database, dan langkah-langkah deploy ke Railway (fullstack + database). Instruksi ditulis dalam Bahasa Indonesia dan disertai contoh perintah untuk PowerShell (Windows).
 
-## 🔑 Login
-Gunakan akun berikut buat masuk:
+---
 
-| Surel            | Kata Sandi |
-|------------------|------------|
-| admin@admin.com | admin      |
+## Ringkasan Singkat
 
-## 🌍 Pengaturan Bahasa
-Aplikasi ini support Bahasa Indonesia & Inggris. Ubah `config/app.php` bagian `locale` jadi `id` atau `en`.
+- Prasyarat: PHP >= 8.1, Composer, Node.js & npm, Git, MySQL (lokal) atau PostgreSQL/MySQL (Railway)
+- Metode cepat: gunakan Makefile bila tersedia (`make setup`, `make run`)
+- Metode manual: instal dependensi, salin `.env`, generate key, migrasi, seed, jalankan server
+- Deploy ke Railway: push ke GitHub, hubungkan project ke Railway, tambahkan plugin DB (Postgres/MySQL), atur environment variables, dan set Post-Deploy command untuk migrasi
 
-## ⏰ Pengaturan Zona Waktu
-Ubah `timezone` di `config/app.php` sesuai kebutuhan. Lihat daftar zona waktu di sini: [PHP Timezones](https://www.php.net/manual/en/timezones.php).
+---
 
-## 📸 Screenshot
+## Daftar Cek (Checklist permintaan)
+
+- [x] Update README untuk setup lokal (Makefile + manual)
+- [x] Contoh perintah PowerShell
+- [x] Instruksi konfigurasi `.env` untuk deployment (Railway)
+- [x] Langkah-langkah deploy ke Railway (fullstack + DB)
+
+---
+
+## Persyaratan (Prerequisites)
+
+- PHP >= 8.1
+- Composer
+- Node.js & npm (untuk build aset)
+- Git
+- MySQL (lokal) atau pilih PostgreSQL/MySQL di Railway
+
+Jika menggunakan Windows (PowerShell), jalankan perintah dalam blok PowerShell yang disediakan.
+
+---
+
+## Setup Lokal — Cara Cepat (Makefile)
+
+Jika Anda ingin cara paling cepat dan repo ini menyertakan Makefile, gunakan:
+
+```powershell
+# Clone + setup (PowerShell)
+git clone <repo-url> .
+make setup
+make setup-db    # migrasi + seeder
+make run         # jalankan server
+```
+
+Makefile biasanya menjalankan `composer install`, `npm install` & build, menyalin `.env`, generate key, migrasi, dan serve.
+
+---
+
+## Setup Lokal — Manual (PowerShell)
+
+1. Clone repo dan masuk ke folder:
+
+```powershell
+git clone <repo-url>
+cd laravel-surat-menyurat-v1
+```
+
+2. Install PHP dependencies:
+
+```powershell
+composer install
+```
+
+3. Install node dependencies & build aset (opsional untuk UI):
+
+```powershell
+npm install
+npm run dev
+```
+
+4. Salin file environment dan edit sesuai kebutuhan:
+
+```powershell
+copy .env.example .env
+# lalu buka .env dengan editor dan atur DB_*, APP_URL, dsb
+```
+
+5. Generate APP_KEY dan simpan nilainya (untuk deploy nanti juga diperlukan):
+
+```powershell
+php artisan key:generate
+```
+
+6. Buat symbolic link untuk storage (untuk akses lampiran):
+
+```powershell
+php artisan storage:link
+```
+
+7. Jalankan migrasi dan seeder:
+
+```powershell
+php artisan migrate --seed
+```
+
+8. Jalankan server development:
+
+```powershell
+php artisan serve --host=127.0.0.1 --port=8000
+# atau: php -S 127.0.0.1:8000 -t public
+```
+
+Default login (jika seeder menambahkan user):
+
+- email: admin@admin.com
+- password: admin
+
+---
+
+## Konfigurasi `.env` (penting untuk deploy)
+
+Beberapa variabel environment utama:
+
+- APP_ENV=production
+- APP_DEBUG=false
+- APP_URL=https://your-app-url
+- APP_KEY=base64:...
+- DB_CONNECTION=mysql|pgsql
+- DB_HOST=your_db_host
+- DB_PORT=3306|5432
+- DB_DATABASE=your_db_name
+- DB_USERNAME=your_db_user
+- DB_PASSWORD=your_db_password
+- FILESYSTEM_DRIVER=public
+
+Untuk Railway, Anda akan mendapatkan kredensial DB yang bisa Anda masukkan ke variabel `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`. Alternatif: Railway menyediakan `DATABASE_URL` — namun agar aman, isikan variabel DB terpisah.
+
+---
+
+## Deploy ke Railway (Langkah demi langkah)
+
+Ringkasan yang akan dilakukan di Railway:
+
+1. Push kode ke GitHub
+2. Buat project baru di Railway dan connect ke repo GitHub
+3. Tambahkan plugin database (Postgres atau MySQL)
+4. Set Environment Variables (APP_KEY, APP_URL, DB_*)
+5. Atur Build & Start Commands
+6. Atur Post-Deploy Command untuk migrasi & seed
+
+Langkah terperinci:
+
+1) Push repo ke GitHub
+
+```powershell
+git add .
+git commit -m "prepare for railway deploy"
+git push origin main
+```
+
+2) Buat project baru di Railway
+
+- Masuk ke https://railway.app dan klik "New Project" → "Deploy from GitHub".
+- Pilih repository Anda dan branch yang ingin dideploy.
+
+3) Tambahkan Database (Plugin)
+
+- Di panel Railway, pilih "Add Plugin" → pilih PostgreSQL atau MySQL.
+- Setelah dibuat, buka plugin dan salin kredensial: host, port, database, user, password.
+
+4) Atur Environment Variables di Railway
+
+- Di project settings → Variables, tambahkan:
+   - APP_KEY = (jalankan `php artisan key:generate --show` secara lokal lalu copy hasilnya)
+   - APP_ENV = production
+   - APP_DEBUG = false
+   - APP_URL = https://<your-railway-subdomain>.railway.app
+   - DB_CONNECTION = mysql (atau pgsql)
+   - DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD = dari plugin credential
+   - FILESYSTEM_DRIVER = public
+
+Tip: untuk mendapatkan APP_KEY lokal:
+
+```powershell
+php artisan key:generate --show
+# copy hasilnya ke APP_KEY di Railway
+```
+
+5) Build Command & Start Command
+
+- Build command (Railway akan menjalankan sebelum deploy):
+
+   composer install --no-dev --optimize-autoloader; npm ci; npm run build
+
+- Start command (Railway harus mengetahui cara menjalankan app). Contoh sederhana:
+
+   php artisan serve --host=0.0.0.0 --port=$PORT
+
+   Atau menggunakan built-in PHP server:
+
+   php -S 0.0.0.0:$PORT -t public
+
+Catatan: `artisan serve` tidak direkomendasikan untuk produksi tetapi cukup untuk aplikasi kecil / staging di Railway. Untuk produksi, gunakan Docker + Nginx/Apache.
+
+6) Post-Deploy Command (jalankan migrasi & seeder otomatis)
+
+- Di Railway, buka Settings → Deploy → Post-Deploy Command, tambahkan:
+
+   php artisan migrate --force && php artisan db:seed --class=ConfigSeeder --force && php artisan config:cache && php artisan route:cache
+
+Atau jalankan migrasi manual melalui Railway Console bila ingin kontrol lebih.
+
+7) Storage link
+
+- Jika aplikasi butuh akses ke `storage`, jalankan `php artisan storage:link` di Railway Console atau masukkan sebagai langkah post-deploy.
+
+---
+
+## Checklist post-deploy
+
+- [ ] Pastikan `APP_KEY` sudah ter-set
+- [ ] Pastikan `DB_*` terisi sesuai plugin
+- [ ] Jalankan migrasi & seed
+- [ ] Cek file upload & storage
+- [ ] Cek log di Railway jika ada error
+
+---
+
+## Tips & Troubleshooting
+
+- Jika mendapatkan error koneksi DB, cek ulang `DB_HOST`, `DB_PORT`, `DB_USERNAME`, `DB_PASSWORD`.
+- Jika aplikasi gagal build karena ekstensi PHP, pastikan Railway image mendukung ekstensi yang dibutuhkan (gd, mbstring, openssl, pdo_mysql/pdo_pgsql).
+- Untuk environment production yang lebih stabil, pertimbangkan membuat Dockerfile dan gunakan Railway dengan Docker deployment.
+
+---
+
+## Screenshot
 
 ![Screenshot](docs/laravel-surat-menyurat-v1.png)
 
-## 🎥 Demo
-Tonton demo proyek ini di [YouTube](https://www.youtube.com/watch?v=dyatVEGavxo).
+---
 
-## 🎨 Template
-Proyek ini pakai template admin [Sneat](https://github.com/themeselection/sneat-html-admin-template-free).
+## Lisensi
 
-## 📜 Lisensi
-Berlisensi di bawah [MIT License](LICENSE).
+Proyek ini dilisensikan di bawah MIT License — lihat file `LICENSE`.
