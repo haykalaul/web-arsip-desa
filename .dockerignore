@@ -1,0 +1,10 @@
+vendor
+node_modules
+.git
+.github
+.gitlab-ci.yml
+.env
+storage/*.key
+storage/framework/cache/data
+storage/logs
+.nixpacks

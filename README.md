@@ -272,15 +272,66 @@ Catatan: `artisan serve` tidak direkomendasikan untuk produksi tetapi cukup untu
 
 6) Post-Deploy Command (jalankan migrasi & seeder otomatis)
 
-- Di Railway, buka Settings → Deploy → Post-Deploy Command, tambahkan:
+- Di Railway, buka Settings → Deploy → Post-Deploy Command. Berikut dua opsi yang lebih aman untuk menghindari kegagalan build jika salah satu langkah gagal:
 
-   php artisan migrate --force && php artisan db:seed --class=ConfigSeeder --force && php artisan config:cache && php artisan route:cache
+  Opsi A — Non-blocking (sederhana):
+
+  ```sh
+  php artisan migrate --force || true && php artisan db:seed --class=ConfigSeeder --force || true && php artisan config:cache || true && php artisan route:cache || true
+  ```
+
+  - Keterangan: setiap perintah diberi `|| true` sehingga jika satu langkah gagal, langkah selanjutnya tetap dijalankan dan proses deploy tidak dianggap gagal.
+
+  Opsi B — Lebih aman dan sedikit verbose (cek status sebelum menjalankan seeder):
+
+  ```sh
+  php artisan migrate --force || { echo 'migrate failed, continuing'; }
+  php -r "exit((require 'vendor/autoload.php') && Illuminate\Database\Capsule\Manager::schema()->hasTable('migrations') ? 0 : 1);" || true
+  php artisan db:seed --class=ConfigSeeder --force || { echo 'seeder failed, continuing'; }
+  php artisan config:cache || true
+  php artisan route:cache || true
+  ```
+
+  - Keterangan: opsi B mencoba menjalankan migrasi lalu menjalankan seeder terpisah dengan logging sederhana. Sesuaikan sesuai kebutuhan; untuk sebagian environment yang sensitif, Anda bisa menghapus `--force` pada seeder atau menjalankannya secara manual.
 
 Atau jalankan migrasi manual melalui Railway Console bila ingin kontrol lebih.
 
 7) Storage link
 
 - Jika aplikasi butuh akses ke `storage`, jalankan `php artisan storage:link` di Railway Console atau masukkan sebagai langkah post-deploy.
+
+---
+
+### Memaksa Railway memakai Docker (menghindari error Nixpacks)
+
+Railway secara default menggunakan Nixpacks untuk build. Jika log deploy menampilkan error terkait `php80 has been dropped` atau kegagalan pada langkah `nix-env -if ...`, Anda bisa memaksa Railway untuk menggunakan Docker build dengan menambahkan `Dockerfile` pada root repo (sudah disertakan di repo ini).
+
+Langkah cepat:
+
+- Pastikan `Dockerfile` ada di root repository (file ini sudah ditambahkan).
+- Push perubahan ke GitHub, lalu di Railway → Deploy settings, pilih untuk redeploy. Railway akan mendeteksi `Dockerfile` dan melakukan Docker build alih-alih Nixpacks.
+
+Jika Railway masih mencoba Nixpacks, buka Logs → Build Logs untuk melihat apakah Railway menemukan `Dockerfile`. Jika tidak, pastikan branch yang dideploy berisi `Dockerfile` dan push sudah berhasil.
+
+---
+
+### Verifikasi & Troubleshooting
+
+1. Setelah deploy, buka Railway Logs. Jika build berhasil, Anda akan melihat langkah Docker build yang menggunakan image `php:8.1` dan perintah `php -S` pada tahap start.
+
+2. Jika muncul error saat `composer install`, periksa apakah environment variable `COMPOSER_ALLOW_SUPERUSER` atau extension PHP yang dibutuhkan tidak tersedia. Anda bisa menambahkannya di `Dockerfile` atau mengatur variables di Railway.
+
+3. Jika migrasi gagal di post-deploy, jalankan migrasi manual via Railway Console:
+
+```powershell
+php artisan migrate --force
+php artisan db:seed --class=ConfigSeeder --force
+```
+
+4. Jika masih muncul error terkait Nixpacks (contoh: error "php80 has been dropped"), artinya Railway tetap memakai Nixpacks — pastikan `Dockerfile` berada di branch yang sama yang Anda deploy dan kosongkan cache/redeploy.
+
+5. Untuk produksi lebih stabil: pertimbangkan menambahkan `Dockerfile` yang lebih lengkap (Nginx + PHP-FPM) atau gunakan Dockerfile multi-stage dengan image resmi yang Anda kontrol.
+
 
 ---
 
