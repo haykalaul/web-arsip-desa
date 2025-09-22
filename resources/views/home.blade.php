@@ -6,137 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desa Kebonsari - Beranda</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        /* Custom styles */
-        .section-heading {
-            margin-bottom: 2rem;
-        }
-
-        .timeline-image img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            margin-bottom: 1rem;
-        }
-
-        .inner-doctor img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-        }
-
-        .form-control:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-        }
-
-        /* Profile section specific styles */
-        .profile-content {
-            display: flex;
-            gap: 30px;
-            align-items: flex-start;
-            flex-wrap: wrap;
-        }
-
-        .profile-text {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .profile-video {
-            flex: 1;
-            min-width: 300px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .profile-video iframe {
-            width: 100%;
-            max-width: 560px;
-            height: 315px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .selengkapnya-btn {
-            background: #007bff;
-            color: white;
-            padding: 12px 30px;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .selengkapnya-btn:hover {
-            background: #0056b3;
-            color: white;
-            text-decoration: none;
-            transform: translateY(-2px);
-        }
-
-        .mission-list {
-            padding-left: 0;
-            counter-reset: mission-counter;
-        }
-
-        .mission-list li {
-            list-style: none;
-            counter-increment: mission-counter;
-            margin-bottom: 12px;
-            padding-left: 30px;
-            position: relative;
-            line-height: 1.6;
-        }
-
-        .mission-list li:before {
-            content: counter(mission-counter);
-            position: absolute;
-            left: 0;
-            top: 0;
-            background: #007bff;
-            color: white;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        @media (max-width: 768px) {
-            .text h1 {
-                font-size: 2.5rem !important;
-            }
-
-            .text p {
-                font-size: 1.5rem !important;
-            }
-
-            .profile-content {
-                flex-direction: column;
-            }
-
-            .profile-video iframe {
-                height: 250px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .profile-video iframe {
-                height: 200px;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -220,8 +91,18 @@
     <div class="about" id="profil" style="padding: 6rem 7%; background: #e1e1e1;">
         <div class="container">
             <h1 class="section-heading text-uppercase text-center mb-5">Profil</h1>
-
-            <div class="profile-content">
+            <div class="profile-content justify-content-center align-items-center flex-wrap gap-4">
+                <!-- Right Side - YouTube Video -->
+                <div class="profile-video mb-4 smb-4 d-flex justify-content-center">
+                    <iframe
+                        src="https://www.youtube.com/embed/uvKZ_ytmgXQ?si=39yd5abq8YCreenz"
+                        title="Mengenal Kampung Bebek Desa Kebonsari Sidoarjo"
+                        frameborder="0"
+                        style="width: 50%; height: 250px; border-radius: 8px;"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                </div>
                 <!-- Left Side - Vision & Mission Content -->
                 <div class="profile-text">
                     <div class="mb-4">
@@ -250,19 +131,6 @@
                     </div>
                 </div>
 
-                <!-- Right Side - YouTube Video -->
-                <div class="profile-video">
-                    <iframe
-                        src="https://www.youtube.com/embed/uvKZ_ytmgXQ?si=39yd5abq8YCreenz"
-                        title="Mengenal Kampung Bebek Desa Kebonsari Sidoarjo"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                    </iframe>
-                    <a href="#profil" class="selengkapnya-btn">
-                        Selengkapnya ▾
-                    </a>
-                </div>
             </div>
         </div>
     </div>
@@ -436,8 +304,8 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <script>
