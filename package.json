@@ -5,7 +5,9 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@iconify/tailwind4": "^1.0.6",
         "axios": "^1.1.2",
+        "flyonui": "^2.4.0",
         "laravel-vite-plugin": "^0.7.0",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
