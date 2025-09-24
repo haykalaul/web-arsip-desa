@@ -29,7 +29,7 @@
                     </li>
                     <li class="nav-item dropdown me-4">
                         <a class="nav-link dropdown-toggle" href="#profil" id="navbarDropdownMenuLink"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            role="button" data-bs-toggle="dropdown" aria-expanded="t">
                             Profile
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
