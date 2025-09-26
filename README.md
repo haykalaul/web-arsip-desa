@@ -270,7 +270,7 @@ php artisan key:generate --show
 
 Catatan: `artisan serve` tidak direkomendasikan untuk produksi tetapi cukup untuk aplikasi kecil / staging di Railway. Untuk produksi, gunakan Docker + Nginx/Apache.
 
-6) Post-Deploy Command (jalankan migrasi & seeder otomatis)
+6) Post - Deploy Command (jalankan migrasi & seeder otomatis)
 
 - Di Railway, buka Settings → Deploy → Post-Deploy Command. Berikut dua opsi yang lebih aman untuk menghindari kegagalan build jika salah satu langkah gagal:
 
