@@ -247,7 +247,7 @@ git push origin main
    - DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD = dari plugin credential
    - FILESYSTEM_DRIVER = public
 
-Tip: untuk mendapatkan APP_KEY lokal:
+Tip: untuk mendapatkan APP_KEY lokal,yaitu:
 
 ```powershell
 php artisan key:generate --show
