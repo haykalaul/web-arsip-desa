@@ -1,5 +1,7 @@
 <p align="center">
-    ![Screenshot](docs/arsera-logo.png)
+  <a href="https://404notfound.fun" target="_blank">
+    <img src="https://avatars.githubusercontent.com/u/87377917?s=200&v=4" width="200" alt="404NFID Logo">
+  </a>
 </p>
 
 ## Laravel Surat Menyurat v1 🚀
