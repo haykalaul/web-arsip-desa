@@ -68,16 +68,7 @@ Bisa didownload di [sini](docs/surat.sql).
    ```sh
    make setup-db
    ```
-<p align="center">
-   <img src="https://avatars.githubusercontent.com/u/87377917?s=200&v=4" width="160" alt="Project Logo">
-</p>
-
-## Laravel Surat Menyurat v1 — Panduan Setup & Deploy (Fullstack + DB)
-
-Panduan ini menjelaskan cara menjalankan aplikasi secara lokal, menyiapkan database, dan langkah-langkah deploy ke Railway (fullstack + database). Instruksi ditulis dalam Bahasa Indonesia dan disertai contoh perintah untuk PowerShell (Windows).
-
----
-
+   
 ## Ringkasan Singkat
 
 - Prasyarat: PHP >= 8.1, Composer, Node.js & npm, Git, MySQL (lokal) atau PostgreSQL/MySQL (Railway)
