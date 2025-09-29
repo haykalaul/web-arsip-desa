@@ -28,17 +28,7 @@
                         <a class="nav-link active" aria-current="page" href="#beranda">Beranda</a>
                     </li>
                     <li class="nav-item dropdown me-4">
-                        <a class="nav-link dropdown-toggle" href="#profil" id="navbarDropdownMenuLink"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="t">
-                            Profile
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#profil">Visi & Misi</a></li>
-                            <li><a class="dropdown-item" href="#profil">Struktur Organisasi</a></li>
-                            <li><a class="dropdown-item" href="#profil">Daftar Pegawai</a></li>
-                            <li><a class="dropdown-item" href="#profil">Profil Pimpinan</a></li>
-                            <li><a class="dropdown-item" href="#profil">Tugas & Fungsi</a></li>
-                        </ul>
+                        <a class="nav-link active" href="#profil">Profil</a>
                     </li>
                     <li class="nav-item me-4">
                         <a class="nav-link" href="#lembagadesa">Lembaga Desa</a>
@@ -68,7 +58,7 @@
                     </li>
                     @else
                     <li class="nav-item">
-                        <a class="btn btn-outline-primary ms-3" href="{{ route('login') }}">Login</a>
+                        <a class="btn btn-primary ms-3" href="{{ route('login') }}">Login</a>
                     </li>
                     @endauth
                 </ul>

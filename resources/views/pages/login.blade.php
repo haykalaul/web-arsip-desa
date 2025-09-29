@@ -1,17 +1,4 @@
 <!DOCTYPE html>
-
-<!-- =========================================================
-* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
-==============================================================
-
-* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
-* Created by: ThemeSelection
-* License: You must have a valid license purchased in order to legally use the theme for your project.
-* Copyright ThemeSelection (https://themeselection.com)
-
-=========================================================
- -->
-<!-- beautify ignore:start -->
 <html
     lang="en"
     class="light-style customizer-hide"
@@ -42,8 +29,14 @@
         rel="stylesheet"
     />
 
-    <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="{{asset('sneat/vendor/fonts/boxicons.css')}}"/>
+    <!-- Font Awesome CDN -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    />
 
     <!-- Core CSS -->
     <link rel="stylesheet" class="template-customizer-core-css" href="{{asset('sneat/vendor/css/core.css')}}"/>
@@ -52,59 +45,59 @@
     <link rel="stylesheet" href="{{asset('sneat/css/demo.css')}}"/>
 
     <!-- Page -->
-    <link rel="stylesheet" href="{{asset('sneat/vendor/css/pages/page-auth.css')}}"/>
-</head>
+    <link rel="stylesheet" href="{{asset('sneat/vendor/css/pages/page-auth.css')}}"/></head>
 
 <body>
-<!-- Content -->
+    <div class="container">
+        <div class="form-wrapper">
+            <div class="welcome">
+                <div>
+                    <h2>Selamat Datang</h2>
+                    <p>
+                        Silakan masuk ke akun Anda untuk <br />
+                        mengakses dashboard admin <br />
+                        {{ config('app.name') }}
+                    </p>
+                </div>
+            </div>
+            <div class="login-form">
+                <form action="{{ route('login') }}" method="POST">
+                    @csrf
 
-<div class="container-xxl">
-    <div class="authentication-wrapper authentication-basic container-p-y">
-        <div class="authentication-inner">
-            <!-- Register -->
-            <div class="card">
-                <div class="card-body">
                     <!-- Logo -->
-                    <div class="app-brand justify-content-center">
-                        <a href="{{ route('home') }}" class="app-brand-link gap-2">
-                            <img src="{{ asset('assets/arsera-logo.png') }}" alt="{{ config('app.name') }}" srcset="" width="75px">
+                    <div class="app-brand mb-4 -bottom-30 text-center">
+                        <a href="{{ route('home') }}">
+                            <img src="{{ asset('assets/arsera-logo.png') }}" alt="{{ config('app.name') }}" width="75px">
                         </a>
                     </div>
 
-                    <div
-                        class="app-brand justify-content-center mb-3"
-                        style="font-size: 1.5rem; font-weight: 600; color: #000000">
-                        Login Admin {{ config('app.name') }}
+                    <div class="input-group">
+                        <input
+                            type="email"
+                            name="email"
+                            id="email"
+                            value="{{ old('email') }}"
+                            required
+                        />
+                        <label for="email">{{ __('model.user.email') }}</label>
+                        <i class="fa-solid fa-envelope"></i>
                     </div>
-                    <!-- /Logo -->
 
-                    <form id="formAuthentication" class="mb-3" action="{{ route('login') }}" method="POST">
-                        @csrf
-                        <div class="mb-3">
-                            <x-input-form
-                                name="email"
-                                type="email"
-                                :label="__('model.user.email')"
-                            />
-                        </div>
-                        <div class="mb-3">
-                            <x-input-form
-                                name="password"
-                                type="password"
-                                :label="__('model.user.password')"
-                            />
-                        </div>
-                        <div class="mt-2">
-                            <button class="btn btn-primary d-grid w-100" type="submit">{{ __('menu.auth.login') }}</button>
-                        </div>
-                    </form>
-                </div>
+                    <div class="input-group">
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            required
+                        />
+                        <label for="password">{{ __('model.user.password') }}</label>
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+
+                    <button class="btn" type="submit">{{ __('menu.auth.login') }}</button>
+                </form>
             </div>
-            <!-- /Register -->
         </div>
     </div>
-</div>
-
-<!-- / Content -->
 </body>
 </html>
