@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     libmagickwand-dev --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
-RUN pecl install imagick && docker-php-ext-enable imagick
+RUN pecl install imagick-3.7.0 && docker-php-ext-enable imagick
 
 RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype && \
     docker-php-ext-install -j$(nproc) gd mbstring pdo pdo_mysql zip xml opcache
