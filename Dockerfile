@@ -28,30 +28,31 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-## Builder stage for node assets
+## Node builder stage
 FROM node:18-bullseye AS node-builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --silent
 COPY resources resources
 COPY vite.config.js .
+COPY public public
 RUN npm run build
 
-## Final stage]
+## Final stage
 FROM base AS final
 WORKDIR /var/www/html
 
-# copy composer files first to leverage layer caching
+# Copy composer files first to leverage layer caching
 COPY composer.json composer.lock ./
 RUN composer install --no-dev --prefer-dist --no-interaction --no-progress --optimize-autoloader
 
 # Copy application code
 COPY . .
 
-# copy built assets from node-builder if exist
-COPY --from=node-builder /app/public/build public/build || true
+# Copy built assets from node-builder
+COPY --from=node-builder /app/public/build public/build
 
-# set permissions
+# Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache || true
 
 ENV APP_ENV=production
@@ -59,6 +60,4 @@ ENV APP_DEBUG=false
 
 EXPOSE 8080
 
-# Use PHP built-in server for lightweight deployments on Railway.
-# Railway provides $PORT environment variable; fallback to 8080 when not set.
 CMD ["sh", "-lc", "php -S 0.0.0.0:${PORT:-8080} -t public"]
