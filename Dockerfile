@@ -1,5 +1,5 @@
 # Multi-stage Dockerfile for Laravel app (PHP 8.1)
-FROM php:8.1-fpm-bullseye AS base
+FROM php:8.2-fpm-bullseye AS base
 
 ENV DEBIAN_FRONTEND=noninteractive
 
