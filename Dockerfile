@@ -37,7 +37,7 @@ COPY resources resources
 COPY vite.config.js .
 RUN npm run build
 
-## Final stage
+## Final stage]
 FROM base AS final
 WORKDIR /var/www/html
 
@@ -49,7 +49,7 @@ RUN composer install --no-dev --prefer-dist --no-interaction --no-progress --opt
 COPY . .
 
 # copy built assets from node-builder if exist
-COPY --from=node-builder /app/dist public/dist || true
+COPY --from=node-builder /app/public/build public/build || true
 
 # set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache || true

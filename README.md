@@ -75,17 +75,6 @@ Bisa didownload di [sini](docs/surat.sql).
 - Metode manual: instal dependensi, salin `.env`, generate key, migrasi, seed, jalankan server
 - Deploy ke Railway: push ke GitHub, hubungkan project ke Railway, tambahkan plugin DB (Postgres/MySQL), atur environment variables, dan set Post-Deploy command untuk migrasi
 
----
-
-## Daftar Cek (Checklist permintaan)
-
-- [x] Update README untuk setup lokal (Makefile + manual)
-- [x] Contoh perintah PowerShell
-- [x] Instruksi konfigurasi `.env` untuk deployment (Railway)
-- [x] Langkah-langkah deploy ke Railway (fullstack + DB)
-
----
-
 ## Persyaratan (Prerequisites)
 
 - PHP >= 8.1
