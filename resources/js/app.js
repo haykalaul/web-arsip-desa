@@ -1,1 +1,1 @@
-@source "./node_modules/flyonui/dist/accordion.js";
+import 'flyonui/dist/accordion.js';
