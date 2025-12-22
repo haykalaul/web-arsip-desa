@@ -104,7 +104,7 @@ form {
   outline: 0;
   background: transparent;
   border-bottom: 2px solid #fff;
-  color: #fff;
+  color: #000;
   font-size: 16px;
   transition: 0.5s;
 }
