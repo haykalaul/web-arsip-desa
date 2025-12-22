@@ -95,6 +95,13 @@
                     </div>
 
                     <button class="btn" type="submit">{{ __('menu.auth.login') }}</button>
+
+                    <!-- Google OAuth Button -->
+                    <div class="mt-3">
+                        <a href="{{ route('auth.google') }}" class="btn btn-google w-100">
+                            <i class="fab fa-google me-2"></i> {{ __('menu.auth.login_with_google') }}
+                        </a>
+                    </div>
                 </form>
             </div>
         </div>

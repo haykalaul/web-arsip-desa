@@ -20,6 +20,10 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+// Google OAuth Routes
+Route::get('/auth/google', [\App\Http\Controllers\Auth\GoogleAuthController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('/auth/google/callback', [\App\Http\Controllers\Auth\GoogleAuthController::class, 'handleGoogleCallback'])->name('auth.google.callback');
+
 // Authenticated routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', function () {

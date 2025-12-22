@@ -13,6 +13,7 @@
         "laravel/fortify": "^1.14",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
+        "laravel/socialite": "*",
         "laravel/tinker": "^2.7",
         "phpoffice/phpword": "^1.3",
         "setasign/fpdf": "^1.8",
