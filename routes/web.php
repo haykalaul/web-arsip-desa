@@ -15,10 +15,16 @@ use App\Http\Controllers\DigitalSignatureController;
 |
 */
 
+// Public routes
 Route::get('/', function () {
     return view('home');
 })->name('home');
 
+// Google OAuth Routes
+Route::get('/auth/google', [\App\Http\Controllers\Auth\GoogleAuthController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('/auth/google/callback', [\App\Http\Controllers\Auth\GoogleAuthController::class, 'handleGoogleCallback'])->name('auth.google.callback');
+
+// Authenticated routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', function () {
         return redirect()->route('dashboard');
@@ -33,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
         ->except(['show', 'edit', 'create'])
         ->middleware(['role:admin']);
 
+// Digital Signature Management Routes
     Route::prefix('digital-signatures')->name('digital-signatures.')->group(function () {
         Route::get('/', [DigitalSignatureController::class, 'index'])->name('index');
         Route::get('/create', [DigitalSignatureController::class, 'create'])->name('create');
@@ -43,6 +50,7 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/{digitalSignature}/revoke', [DigitalSignatureController::class, 'revoke'])->name('revoke');
     });
 
+    // Profile and Settings Routes
     Route::get('profile', [\App\Http\Controllers\PageController::class, 'profile'])
         ->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\PageController::class, 'profileUpdate'])
@@ -58,27 +66,28 @@ Route::middleware(['auth'])->group(function () {
         ->name('settings.update')
         ->middleware(['role:admin']);
 
+    // Attachment Removal Route
     Route::delete('attachment', [\App\Http\Controllers\PageController::class, 'removeAttachment'])
         ->name('attachment.destroy');
-
+    // Transaction Routes
     Route::prefix('transaction')->as('transaction.')->group(function () {
         Route::resource('incoming', \App\Http\Controllers\IncomingLetterController::class);
         Route::resource('outgoing', \App\Http\Controllers\OutgoingLetterController::class);
         Route::resource('{letter}/disposition', \App\Http\Controllers\DispositionController::class)->except(['show']);
     });
-
+    // Agenda Routes
     Route::prefix('agenda')->as('agenda.')->group(function () {
         Route::get('incoming', [\App\Http\Controllers\IncomingLetterController::class, 'agenda'])->name('incoming');
         Route::get('incoming/print', [\App\Http\Controllers\IncomingLetterController::class, 'print'])->name('incoming.print');
         Route::get('outgoing', [\App\Http\Controllers\OutgoingLetterController::class, 'agenda'])->name('outgoing');
         Route::get('outgoing/print', [\App\Http\Controllers\OutgoingLetterController::class, 'print'])->name('outgoing.print');
     });
-
+    // Gallery Routes
     Route::prefix('gallery')->as('gallery.')->group(function () {
         Route::get('incoming', [\App\Http\Controllers\LetterGalleryController::class, 'incoming'])->name('incoming');
         Route::get('outgoing', [\App\Http\Controllers\LetterGalleryController::class, 'outgoing'])->name('outgoing');
     });
-
+    // Reference Data Routes
     Route::prefix('reference')->as('reference.')->middleware(['role:admin'])->group(function () {
         Route::resource('classification', \App\Http\Controllers\ClassificationController::class)->except(['show', 'create', 'edit']);
         Route::resource('status', \App\Http\Controllers\LetterStatusController::class)->except(['show', 'create', 'edit']);
